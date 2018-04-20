@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    title Me own Diary
+  body
+    form#form(method='get',action='.')
+    h1 Me own Diary
+    p Key&nbsp
+      input#key(type='password',form='form')
+      input#save(type='submit',value='SAVE',form='form')
+      span#timeSince
+      span &nbsp;since last entry 
+
+    #new
+      h2 New Entry
+      form#formNew(onsubmit='return false')
+        p Title&nbsp
+          input#title(name='title',required,autofocus)
+        textarea#text(cols=50,rows=12,name='text',required,autocomplete=false) Dear Diary,&NewLine;&NewLine;
+        br
+        button#submit CREATE
+
+    #old
+      h2 Previous Entries
+      button#populate Populate
+      table#tblPrevious
+      #display
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js')
+    script(src='script.js')
