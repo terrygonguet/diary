@@ -5,7 +5,7 @@ $(document).ready(function () {
     key = $(this).val();
   });
 
-  $("#text").text("Dear Diary,\n\n");
+  $("#text").val("Dear Diary,\n\n");
 
   $("#formNew").submit(function (e) {
     var data = {
@@ -22,7 +22,7 @@ $(document).ready(function () {
       success: function (res) {
         if (!res.error) {
           $("#title").val("");
-          $("#text").text("Dear Diary,\n\n");
+          $("#text").val("Dear Diary,\n\n");
           populate();
         } else {
           $("<pre>").text(res.message).appendTo("#new");
@@ -39,6 +39,11 @@ $(document).ready(function () {
   setTimeout(function () {
     $("#populate").click();
   }, 200);
+
+  setInterval(function () {
+    var timeSince = moment.duration(moment().diff(entries[0].createdAt));
+    $("#timeSince").text(timeSince.humanize());
+  }, 60 * 1000 * 5)
 });
 
 function populate() {
@@ -54,7 +59,7 @@ function populate() {
       entries = res;
       entries.forEach(en => en.createdAt = moment(en.createdAt));
       for (var entry of res) {
-        $(`<tr onclick="show('${entry["_id"]}')"><td>${entry.title}</td><td>${moment(entry.createdAt).format("dddd, MMMM Do YYYY, kk:mm:ss")}</td></tr>`)
+        $(`<tr onclick="show('${entry["_id"]}')"><td>${entry.title}</td><td>${entry.createdAt.format("dddd, MMMM Do YYYY, kk:mm:ss")}</td></tr>`)
           .appendTo("#tblPrevious");
       }
       var timeSince = moment.duration(moment().diff(entries[0].createdAt));

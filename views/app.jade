@@ -9,13 +9,13 @@ html(lang="en")
       input#key(type='password',form='form')
       input#save(type='submit',value='SAVE',form='form')
       span#timeSince
-      span &nbsp;since last entry 
+      span &nbsp;since last entry
 
     #new
       h2 New Entry
       form#formNew(onsubmit='return false')
         p Title&nbsp
-          input#title(name='title',required,autofocus)
+          input#title(name='title',required,autofocus,value='')
         textarea#text(cols=50,rows=12,name='text',required,autocomplete=false) Dear Diary,&NewLine;&NewLine;
         br
         button#submit CREATE
