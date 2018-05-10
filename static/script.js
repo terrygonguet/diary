@@ -4,6 +4,14 @@ $(document).ready(function () {
   $("#key").change(function () {
     key = $(this).val();
   });
+  if (key.length) {
+    $("#form p").hide();
+    $("#form img").show()
+    .click(function (e) {
+      $("#form p").show();
+      $("#form img").hide();
+    });
+  }
 
   $("#text").text("Dear Diary,\n\n");
 
