@@ -34,6 +34,6 @@ app.get("/", function (req, res) {
   res.render("app");
 });
 
-app.listen(process.env.PORT || 8080, async function () {
+app.listen(process.env.PORT || 80, async function () {
   console.log("Server started");
 });

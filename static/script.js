@@ -42,20 +42,18 @@ $(document).ready(function () {
 });
 
 function populate() {
-  $("#tblPrevious").empty();
+  $("#tblInner").empty();
   $.get({
     headers: { key },
     url: "/entry",
     success: function (res) {
       if (res.error) $("#text").text(res.message);
       if (!res.length) return;
-      $("<tr><th>Title</th><th>Created At</th></tr>")
-        .appendTo("#tblPrevious");
       entries = res;
       entries.forEach(en => en.createdAt = moment(en.createdAt));
       for (var entry of res) {
-        $(`<tr onclick="show('${entry["_id"]}')"><td>${entry.title}</td><td>${moment(entry.createdAt).format("dddd, MMMM Do YYYY, kk:mm:ss")}</td></tr>`)
-          .appendTo("#tblPrevious");
+        $(`<tr onclick="show('${entry["_id"]}')" class='w3-hover-deep-orange'><td>${entry.title}</td><td>${moment(entry.createdAt).format("dddd, MMMM Do YYYY, kk:mm:ss")}</td></tr>`)
+          .appendTo("#tblInner");
       }
       var timeSince = moment.duration(moment().diff(entries[0].createdAt));
       $("#timeSince").text(timeSince.humanize());
