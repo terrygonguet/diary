@@ -24,8 +24,8 @@ html(lang="en")
           p
             span#timeSince - hours
             span &nbsp;since last entry
-          p Title&nbsp
-            input#title(name='title',required,autofocus)
+          p
+            input#title(name='title',required,autofocus,placeholder='Title',value='')
           textarea#text(rows=8,name='text',required,autocomplete=false) Dear Diary,&NewLine;&NewLine;
           br
           button#submit(class=btnClasses) CREATE
@@ -47,4 +47,7 @@ html(lang="en")
       #display
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js')
-    script(src='script.js')
+    script
+      include ../lib/nicEdit.js
+    script
+      include script.js

@@ -1,5 +1,10 @@
 var entries, key;
 $(document).ready(function () {
+  let editor = new nicEditor({ fullPanel:false, maxHeight:200 }).addInstance('text');
+  let txtInstance = editor.nicInstances[0];
+  $(txtInstance.elm).css('min-height', 'initial');
+  $(txtInstance.editorContain).css('border', 'none');
+
   key = $("#key").val();
   $("#key").change(function () {
     key = $(this).val();
@@ -13,12 +18,12 @@ $(document).ready(function () {
     });
   }
 
-  $("#text").val("Dear Diary,\n\n");
+  txtInstance.setContent("Dear Diary,\n\n");
 
   $("#formNew").submit(function (e) {
     var data = {
       title: $("#title").val(),
-      text: $("#text").val()
+      text: txtInstance.getContent()
     };
     if (!data.title || !data.text) return false;
     $.post({
@@ -30,7 +35,7 @@ $(document).ready(function () {
       success: function (res) {
         if (!res.error) {
           $("#title").val("");
-          $("#text").val("Dear Diary,\n\n");
+          txtInstance.setContent("Dear Diary,\n\n");
           populate();
         } else {
           $("<pre>").text(res.message).appendTo("#new");
@@ -77,7 +82,7 @@ function populate() {
 
 function show(id) {
   var entry = entries.find(e => e["_id"] === id);
-  $("#display").empty();
-  $("<h3>").text(entry.title).appendTo("#display");
-  $("<p>").text(entry.text).appendTo("#display");
+  $("#display")
+  .empty()
+  .html(`<h3>${entry.title}</h3>${entry.text}`);
 }
